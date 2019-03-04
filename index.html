@@ -1,1 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>OBA Search</title>
+  </head>
+  <body>
+    <main>
+      <h1>OBA Zoeken</h1>
+      <section class="container">
+        <div class="form-wrapper">
+          <form action="/" method="POST">
+            <label for="search">Zoeken</label>
+            <input type="text" id="search" />
+          </form>
+        </div>
+        <div class="search-results" aria-hidden="true">
+          <h2>Zoek resultaten</h2>
+          <div class="results"></div>
+        </div>
+      </section>
+    </main>
 
+    <script src="./src/app.js"></script>
+  </body>
+</html>
