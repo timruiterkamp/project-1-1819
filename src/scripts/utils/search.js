@@ -19,11 +19,14 @@ const search = async (query, amount) => {
 
   event.loading(body);
   const data = await request.searchAutoCompleteValue(query, amount);
+  console.log(data);
   body.classList.remove("hidden");
   create.searchResults(body, data);
 
   const moreResults = document.querySelector(".autocomplete-more");
-  moreResults.addEventListener("click", onClick);
+  if (moreResults) {
+    moreResults.addEventListener("click", onClick);
+  }
 };
 
 const searchDetail = async query => {
@@ -38,11 +41,14 @@ const searchDetail = async query => {
   event.loading(body);
 
   const data = await request.searchValue(query);
+
+  console.log(data);
+
   Store.dispatch("setSearchData", data);
   aside.classList.remove("hidden");
   body.classList.remove("loading");
-
   sorting.classList.remove("hidden");
+
   create.searchDetailResults(body, Store.state.searchData);
   initFilters();
 };

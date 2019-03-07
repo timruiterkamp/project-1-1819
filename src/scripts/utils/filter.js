@@ -8,7 +8,7 @@ const sortOnBooks = e => {
 
   if (e.target.checked) {
     const bookFiltering = Store.state.searchData.map(data =>
-      data.filter(items => items.formats.format._text === "book")
+      data.filter(items => items.format === "book")
     );
     create.searchDetailResults(body, bookFiltering);
   } else {
@@ -21,7 +21,7 @@ const sortOnDVD = e => {
 
   if (e.target.checked) {
     const dvdFiltering = Store.state.searchData.map(data =>
-      data.filter(items => items.formats.format._text === "dvd")
+      data.filter(items => items.format === "dvd")
     );
     create.searchDetailResults(body, dvdFiltering);
   } else {
@@ -34,7 +34,7 @@ const sortOnAudio = e => {
 
   if (e.target.checked) {
     const audioFiltering = Store.state.searchData.map(data =>
-      data.filter(items => items.formats.format._text === "audio")
+      data.filter(items => items.format === "audio")
     );
     create.searchDetailResults(body, audioFiltering);
   } else {
@@ -55,14 +55,12 @@ const sortOnYear = e => {
         b.publication.year
       ) {
         if (
-          a.publication.year._text.toUpperCase() <
-          b.publication.year._text.toUpperCase()
+          a.publication.year.toUpperCase() < b.publication.year.toUpperCase()
         ) {
           return -1;
         }
         if (
-          a.publication.year._text.toUpperCase() >
-          b.publication.year._text.toUpperCase()
+          a.publication.year.toUpperCase() > b.publication.year.toUpperCase()
         ) {
           return 1;
         }
@@ -81,22 +79,11 @@ const sortOnTitle = e => {
 
   const titleFiltering = Store.state.searchData.map(data =>
     data.sort((a, b) => {
-      if (
-        a.titles &&
-        a.titles.title._text &&
-        b.titles &&
-        b.titles.title._text
-      ) {
-        if (
-          a.titles.title._text.toUpperCase() <
-          b.titles.title._text.toUpperCase()
-        ) {
+      if (a.title && a.title.full && b.title && b.title.full) {
+        if (a.title.full.toUpperCase() < b.title.full.toUpperCase()) {
           return -1;
         }
-        if (
-          a.titles.title._text.toUpperCase() >
-          b.titles.title._text.toUpperCase()
-        ) {
+        if (a.title.full.toUpperCase() > b.title.full.toUpperCase()) {
           return 1;
         }
         return 0;
@@ -114,17 +101,11 @@ const sortOnAuthor = e => {
 
   const authorFiltering = Store.state.searchData.map(data =>
     data.sort((a, b) => {
-      if (a.authors && a.authors.author && b.authors && b.authors.author) {
-        if (
-          a.authors["main-author"]._text.toUpperCase() <
-          b.authors["main-author"]._text.toUpperCase()
-        ) {
+      if (a.author && b.author) {
+        if (a.author.fullname.toUpperCase() < b.author.fullname.toUpperCase()) {
           return -1;
         }
-        if (
-          a.authors["main-author"]._text.toUpperCase() >
-          b.authors["main-author"]._text.toUpperCase()
-        ) {
+        if (a.author.fullname.toUpperCase() > b.author.fullname.toUpperCase()) {
           return 1;
         }
         return 0;
@@ -142,8 +123,8 @@ const filterTitle = e => {
     const body = document.querySelector(".search-results");
     const titleFiltering = Store.state.searchData.map(data =>
       data.filter(item => {
-        if (item.titles && item.titles.title._text) {
-          return item.titles.title._text
+        if (item.title) {
+          return item.title.full
             .toLowerCase()
             .includes(e.target.value.toLowerCase());
         }
@@ -159,8 +140,8 @@ const filterAuthor = e => {
     const body = document.querySelector(".search-results");
     const authorFiltering = Store.state.searchData.map(data =>
       data.filter(item => {
-        if (item.authors && item.authors["main-author"]._text) {
-          return item.authors["main-author"]._text
+        if (item.author) {
+          return item.author.fullname
             .toLowerCase()
             .includes(e.target.value.toLowerCase());
         }
@@ -176,8 +157,8 @@ const filterYear = e => {
     const body = document.querySelector(".search-results");
     const yearFiltering = Store.state.searchData.map(data =>
       data.filter(item => {
-        if (item.publication && item.publication.year._text) {
-          return item.publication.year._text
+        if (item.publication && item.publication.year) {
+          return item.publication.year
             .toLowerCase()
             .includes(e.target.value.toLowerCase());
         }
@@ -197,7 +178,6 @@ export const initFilters = () => {
   const stringTitle = document.querySelector("#title");
   const stringAuthor = document.querySelector("#auteur");
   const stringYear = document.querySelector("#year");
-  const stringGenre = document.querySelector("#Genre");
 
   books.addEventListener("change", sortOnBooks);
   dvd.addEventListener("change", sortOnDVD);
@@ -208,5 +188,4 @@ export const initFilters = () => {
   stringTitle.addEventListener("input", filterTitle);
   stringAuthor.addEventListener("input", filterAuthor);
   stringYear.addEventListener("input", filterYear);
-  stringGenre.addEventListener("change", filterGenre);
 };

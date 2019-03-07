@@ -14,6 +14,7 @@ export default class Generate extends Component {
   }
 
   async searchResults(appendParent, data) {
+    console.log(data);
     appendParent.innerHTML = "";
     const w = this.w;
 
@@ -33,43 +34,37 @@ export default class Generate extends Component {
           "div",
           { class: "autocomplete-items" },
           ...res.map(result => {
-            return result && result.titles.title._text
+            return result && result.title
               ? w(
-                  "a",
+                  "div",
                   {
-                    class: "autocomplete-item",
-                    href: result["detail-page"]._text,
-                    target: "_blank"
+                    class: "autocomplete-item"
                   },
 
                   w(
                     "div",
                     { class: "autocomplete-image" },
-                    result.coverimages
+                    result.images
                       ? w("img", {
-                          src: result.coverimages.coverimage[0]._text
+                          src: result.images[0]
                         })
                       : w("div", { class: "autocomplete-image-placeholder" })
                   ),
                   w(
                     "div",
                     { class: "autocomplete-text" },
-                    result.titles && result.titles.title._text
-                      ? w("h4", {}, result.titles.title._text)
+                    result.title
+                      ? w("h4", {}, result.title.full)
                       : w("h4", {}, "Titel: niet bekend"),
 
-                    result.authors
-                      ? w(
-                          "p",
-                          {},
-                          "format: " + result.authors["main-author"]._text
-                        )
+                    result.author
+                      ? w("p", {}, "format: " + result.author.fullname)
                       : w("p", {}, "Auteur: niet bekend"),
-                    result.summaries
-                      ? w("p", {}, result.summaries.summary._text)
+                    result.summary
+                      ? w("p", {}, result.summary)
                       : w("p", {}, "Samenvatting: niet bekend"),
-                    result.formats
-                      ? w("p", {}, "format: " + result.formats.format._text)
+                    result.format
+                      ? w("p", {}, "format: " + result.format)
                       : w("p", {}, "Format: niet bekend")
                   )
                 )
@@ -100,40 +95,31 @@ export default class Generate extends Component {
           "div",
           { class: "search-items" },
           ...res.map(result => {
-            return result && result.titles.title._text && result["detail-page"]
+            console.log(result);
+            return result && result.title
               ? w(
-                  "a",
+                  "div",
                   {
-                    class: "search-item",
-                    href: result["detail-page"]._text,
-                    target: "_blank"
+                    class: "search-item"
                   },
 
-                  result.coverimages
-                    ? result.coverimages.coverimage[1]
+                  result.images
+                    ? result.images[1]
                       ? w("img", {
-                          src: result.coverimages.coverimage[1]._text
+                          src: result.images[1]
                         })
                       : w("img", {
-                          src: result.coverimages.coverimage[0]._text
+                          src: result.images[0]
                         })
                     : w("div", { class: "search-image-placeholder" }),
-                  result.titles && result.titles.title._text
-                    ? w("h4", {}, result.titles.title._text)
+                  result.title && result.title.full
+                    ? w("h4", {}, result.title.full)
                     : w("h4", {}, "Titel: niet bekend"),
-                  result.authors
-                    ? w(
-                        "p",
-                        {},
-                        "Auteur: " + result.authors["main-author"]._text
-                      )
+                  result.author
+                    ? w("p", {}, "Auteur: " + result.author.fullname)
                     : w("p", {}, "Auteur: niet bekend"),
-                  result.summaries
-                    ? w(
-                        "p",
-                        {},
-                        "Samenvatting: " + result.summaries.summary._text
-                      )
+                  result.summary
+                    ? w("p", {}, "Samenvatting: " + result.summary)
                     : w("p", {}, "Samenvatting: niet bekend"),
                   result.formats
                     ? w("p", {}, "format: " + result.formats.format._text)
