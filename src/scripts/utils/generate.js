@@ -33,7 +33,6 @@ export default class Generate extends Component {
           "div",
           { class: "autocomplete-items" },
           ...res.map(result => {
-            console.log(result);
             return result && result.titles.title._text
               ? w(
                   "a",
@@ -79,7 +78,7 @@ export default class Generate extends Component {
           w(
             "div",
             { class: "autocomple-item" },
-            w("a", { class: "autocomplete-more" }, "Meer weergeven")
+            w("a", { class: "autocomplete-more" }, "Alles weergeven")
           )
         );
         appendParent.appendChild(this.dom.create(content));
@@ -90,10 +89,8 @@ export default class Generate extends Component {
   async searchDetailResults(appendParent, data) {
     appendParent.innerHTML = "";
     const w = this.w;
-    console.log(data);
 
     data.map(res => {
-      console.log(res.length);
       if (res.length < 1) {
         appendParent.appendChild(
           this.dom.create(w("h2", { class: "no-results" }, "geen resultaten"))

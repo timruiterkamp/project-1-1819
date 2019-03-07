@@ -197,8 +197,6 @@ export const initFilters = () => {
   const stringTitle = document.querySelector("#title");
   const stringAuthor = document.querySelector("#auteur");
   const stringYear = document.querySelector("#year");
-  const stringISBN = document.querySelector("#isbn");
-  const stringUitgever = document.querySelector("#uitgever");
   const stringGenre = document.querySelector("#Genre");
 
   books.addEventListener("change", sortOnBooks);
@@ -210,7 +208,5 @@ export const initFilters = () => {
   stringTitle.addEventListener("input", filterTitle);
   stringAuthor.addEventListener("input", filterAuthor);
   stringYear.addEventListener("input", filterYear);
-  stringISBN.addEventListener("input", filterISBN);
-  stringUitgever.addEventListener("input", filterUitgever);
   stringGenre.addEventListener("change", filterGenre);
 };

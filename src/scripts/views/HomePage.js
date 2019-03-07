@@ -103,10 +103,10 @@ export default class Home extends Component {
             { class: "search" },
             w(
               "aside",
-              { class: "search-filters hidden" },
+              { class: "search-filters" },
               w(
                 "div",
-                { class: "filters-wrapper" },
+                { class: "filters-wrapper hidden" },
                 w("h3", {}, "Format filters"),
                 w(
                   "section",
@@ -114,7 +114,7 @@ export default class Home extends Component {
                   w(
                     "label",
                     { for: "books" },
-                    "Books",
+                    "Boeken",
                     w("input", { type: "checkbox", name: "Books", id: "books" })
                   ),
                   w(
@@ -153,22 +153,6 @@ export default class Home extends Component {
                     ),
                     w(
                       "label",
-                      { for: "ISBN" },
-                      "ISBN",
-                      w("input", { type: "text", name: "ISBN", id: "isbn" })
-                    ),
-                    w(
-                      "label",
-                      { for: "Uitgever" },
-                      "Uitgever",
-                      w("input", {
-                        type: "text",
-                        name: "Uitgever",
-                        id: "uitgever"
-                      })
-                    ),
-                    w(
-                      "label",
                       { for: "Genre" },
                       "Genre",
                       w(
@@ -191,7 +175,7 @@ export default class Home extends Component {
               w(
                 "div",
                 { class: "sorting hidden" },
-                w("p", {}, "sorteer op:"),
+                w("p", {}, "Sorteer op:"),
                 w(
                   "ul",
                   {},

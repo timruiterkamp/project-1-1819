@@ -31,14 +31,17 @@ const searchDetail = async query => {
   const create = new Generate();
   const event = new eventHandler();
   const body = document.querySelector(".search-results");
-  const aside = document.querySelector(".search-filters");
+  const aside = document.querySelector(".filters-wrapper");
   const sorting = document.querySelector(".sorting");
   body.innerHTML = "";
+  body.classList.add("loading");
   event.loading(body);
 
   const data = await request.searchValue(query);
   Store.dispatch("setSearchData", data);
   aside.classList.remove("hidden");
+  body.classList.remove("loading");
+
   sorting.classList.remove("hidden");
   create.searchDetailResults(body, Store.state.searchData);
   initFilters();

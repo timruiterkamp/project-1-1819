@@ -52,6 +52,11 @@
 
   &-results {
     margin: 0 auto;
+    position: relative;
+
+    &.loading {
+      width: 40vw;
+    }
   }
 
   &-image-placeholder {
