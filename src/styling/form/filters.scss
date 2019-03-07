@@ -11,10 +11,23 @@
       flex-direction: column;
 
       &-wrapper {
-        position: fixed;
+        // position: fixed;
+        overflow: scroll;
+        margin-top: 2em;
         background-color: white;
-        width: 15%;
+        width: 85%;
         padding: 1em;
+        min-height: 250px;
+      }
+
+      label {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      input {
+        margin-right: 10px;
       }
     }
 
@@ -24,14 +37,22 @@
       padding: 1em 0;
     }
 
-    label {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-      align-items: center;
-    }
-    input {
-      margin-right: 10px;
+    .rich-filters {
+      label {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: baseline;
+      }
+      input,
+      select {
+        margin-right: 10px;
+        border: 1px solid lightgray;
+        margin: 0.8em 0;
+        width: 90%;
+        border-radius: 5px;
+        height: 20px;
+      }
     }
   }
 }

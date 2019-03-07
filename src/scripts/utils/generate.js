@@ -90,48 +90,63 @@ export default class Generate extends Component {
   async searchDetailResults(appendParent, data) {
     appendParent.innerHTML = "";
     const w = this.w;
+    console.log(data);
 
     data.map(res => {
-      const content = w(
-        "div",
-        { class: "search-items" },
-        ...res.map(result => {
-          console.log(result);
-          return result && result.titles.title._text && result["detail-page"]
-            ? w(
-                "a",
-                {
-                  class: "search-item",
-                  href: result["detail-page"]._text,
-                  target: "_blank"
-                },
+      console.log(res.length);
+      if (res.length < 1) {
+        appendParent.appendChild(
+          this.dom.create(w("h2", { class: "no-results" }, "geen resultaten"))
+        );
+      } else {
+        const content = w(
+          "div",
+          { class: "search-items" },
+          ...res.map(result => {
+            return result && result.titles.title._text && result["detail-page"]
+              ? w(
+                  "a",
+                  {
+                    class: "search-item",
+                    href: result["detail-page"]._text,
+                    target: "_blank"
+                  },
 
-                result.coverimages
-                  ? result.coverimages.coverimage[1]
-                    ? w("img", { src: result.coverimages.coverimage[1]._text })
-                    : w("img", { src: result.coverimages.coverimage[0]._text })
-                  : w("div", { class: "search-image-placeholder" }),
-                result.titles && result.titles.title._text
-                  ? w("h4", {}, result.titles.title._text)
-                  : w("h4", {}, "Titel: niet bekend"),
-                result.authors
-                  ? w("p", {}, "Auteur: " + result.authors["main-author"]._text)
-                  : w("p", {}, "Auteur: niet bekend"),
-                result.summaries
-                  ? w(
-                      "p",
-                      {},
-                      "Samenvatting: " + result.summaries.summary._text
-                    )
-                  : w("p", {}, "Samenvatting: niet bekend"),
-                result.formats
-                  ? w("p", {}, "format: " + result.formats.format._text)
-                  : w("p", {}, "Format: niet bekend")
-              )
-            : "";
-        })
-      );
-      appendParent.appendChild(this.dom.create(content));
+                  result.coverimages
+                    ? result.coverimages.coverimage[1]
+                      ? w("img", {
+                          src: result.coverimages.coverimage[1]._text
+                        })
+                      : w("img", {
+                          src: result.coverimages.coverimage[0]._text
+                        })
+                    : w("div", { class: "search-image-placeholder" }),
+                  result.titles && result.titles.title._text
+                    ? w("h4", {}, result.titles.title._text)
+                    : w("h4", {}, "Titel: niet bekend"),
+                  result.authors
+                    ? w(
+                        "p",
+                        {},
+                        "Auteur: " + result.authors["main-author"]._text
+                      )
+                    : w("p", {}, "Auteur: niet bekend"),
+                  result.summaries
+                    ? w(
+                        "p",
+                        {},
+                        "Samenvatting: " + result.summaries.summary._text
+                      )
+                    : w("p", {}, "Samenvatting: niet bekend"),
+                  result.formats
+                    ? w("p", {}, "format: " + result.formats.format._text)
+                    : w("p", {}, "Format: niet bekend")
+                )
+              : "";
+          })
+        );
+        appendParent.appendChild(this.dom.create(content));
+      }
     });
   }
 }

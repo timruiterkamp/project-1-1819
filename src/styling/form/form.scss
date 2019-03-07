@@ -104,6 +104,25 @@
 
 .no-results {
   text-align: center;
+  padding: 2em 0;
+}
+
+.sorting {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 0 1em;
+
+  p {
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+  ul {
+    display: flex;
+  }
+  li {
+    padding: 0 0.4em;
+  }
 }
 
 .autocomplete {

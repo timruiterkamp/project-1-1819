@@ -2,9 +2,10 @@ import GetData from "../requests/Api";
 import Generate from "./generate";
 import eventHandler from "./eventHandler";
 import { delay } from "./utilities";
+import Store from "../store/index";
+import { initFilters } from "./filter";
 
 const onClick = () => {
-  console.log("klik");
   const value = document.querySelector("#searchField").value;
   document.querySelector(".autocomplete-results").classList.add("hidden");
   searchDetail(value);
@@ -31,11 +32,16 @@ const searchDetail = async query => {
   const event = new eventHandler();
   const body = document.querySelector(".search-results");
   const aside = document.querySelector(".search-filters");
+  const sorting = document.querySelector(".sorting");
   body.innerHTML = "";
   event.loading(body);
+
   const data = await request.searchValue(query);
+  Store.dispatch("setSearchData", data);
   aside.classList.remove("hidden");
-  create.searchDetailResults(body, data);
+  sorting.classList.remove("hidden");
+  create.searchDetailResults(body, Store.state.searchData);
+  initFilters();
 };
 
 const initSearchMode = () => {
@@ -46,9 +52,9 @@ const initSearchMode = () => {
 
 const onSubmit = e => {
   e.preventDefault();
-  initSearchMode();
-  const value = document.querySelector("#searchField").value;
-  searchDetail(value);
+  // initSearchMode();
+  // const value = document.querySelector("#searchField").value;
+  // searchDetail(value);
 };
 
 const onChange = e => {

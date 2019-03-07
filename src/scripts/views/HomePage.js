@@ -1,5 +1,4 @@
 import Component from "../lib/component";
-import { Requests } from "../requests/requests";
 import eventHandler from "../utils/eventHandler";
 import Store from "../store/index";
 import { initSearch } from "../utils/search";
@@ -108,7 +107,7 @@ export default class Home extends Component {
               w(
                 "div",
                 { class: "filters-wrapper" },
-                w("h3", {}, "Filters"),
+                w("h3", {}, "Format filters"),
                 w(
                   "section",
                   { class: "filters" },
@@ -116,24 +115,93 @@ export default class Home extends Component {
                     "label",
                     { for: "books" },
                     "Books",
-                    w("input", { type: "checkbox", id: "books" })
+                    w("input", { type: "checkbox", name: "Books", id: "books" })
                   ),
                   w(
                     "label",
                     { for: "dvd" },
                     "DVD",
-                    w("input", { type: "checkbox", id: "dvd" })
+                    w("input", { type: "checkbox", name: "DVD", id: "dvd" })
                   ),
                   w(
                     "label",
                     { for: "audio" },
                     "Audio",
-                    w("input", { type: "checkbox", id: "audio" })
+                    w("input", { type: "checkbox", name: "Audio", id: "audio" })
+                  ),
+                  w("h3", {}, "Uitgebreide filters"),
+                  w(
+                    "section",
+                    { class: "rich-filters" },
+                    w(
+                      "label",
+                      { for: "Titel" },
+                      "Titel",
+                      w("input", { type: "text", name: "Title", id: "title" })
+                    ),
+                    w(
+                      "label",
+                      { for: "Auteur" },
+                      "Auteur",
+                      w("input", { type: "text", name: "Auteur", id: "auteur" })
+                    ),
+                    w(
+                      "label",
+                      { for: "Jaar" },
+                      "Jaar",
+                      w("input", { type: "number", name: "Year", id: "year" })
+                    ),
+                    w(
+                      "label",
+                      { for: "ISBN" },
+                      "ISBN",
+                      w("input", { type: "text", name: "ISBN", id: "isbn" })
+                    ),
+                    w(
+                      "label",
+                      { for: "Uitgever" },
+                      "Uitgever",
+                      w("input", {
+                        type: "text",
+                        name: "Uitgever",
+                        id: "uitgever"
+                      })
+                    ),
+                    w(
+                      "label",
+                      { for: "Genre" },
+                      "Genre",
+                      w(
+                        "select",
+                        { type: "select", name: "Genre", id: "Genre" },
+                        w(
+                          "option",
+                          { value: "Avonturenroman", name: "Avonturenroman" },
+                          "Avonturenroman"
+                        )
+                      )
+                    )
                   )
                 )
               )
             ),
-            w("section", { class: "search-results" })
+            w(
+              "section",
+              {},
+              w(
+                "div",
+                { class: "sorting hidden" },
+                w("p", {}, "sorteer op:"),
+                w(
+                  "ul",
+                  {},
+                  w("li", { class: "sorting-year" }, "jaar"),
+                  w("li", { class: "sorting-title" }, "titel"),
+                  w("li", { class: "sorting-author" }, "auteur")
+                )
+              ),
+              w("div", { class: "search-results" })
+            )
           )
         )
       )
