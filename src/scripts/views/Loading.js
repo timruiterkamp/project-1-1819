@@ -6,13 +6,13 @@ export default class LoadingTemplate extends Component {
   }
 
   async render(container) {
-    this.clean();
-
+    // let el = this.app.querySelector(container);
+    console.log(container);
     const w = this.dom.write;
     const body = container ? container : this.app;
 
     body.appendChild(
-      this.dom.create(w("section", { class: "loading" }, w("h1", {}, "Laden")))
+      this.dom.create(w("section", { class: "loader" }, w("h1", {}, "Laden")))
     );
   }
 

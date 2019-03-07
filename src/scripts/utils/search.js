@@ -1,25 +1,74 @@
 import GetData from "../requests/Api";
 import Generate from "./generate";
+import eventHandler from "./eventHandler";
+import { delay } from "./utilities";
 
-const search = async query => {
+const onClick = () => {
+  console.log("klik");
+  const value = document.querySelector("#searchField").value;
+  document.querySelector(".autocomplete-results").classList.add("hidden");
+  searchDetail(value);
+};
+
+const search = async (query, amount) => {
   const request = new GetData();
   const create = new Generate();
-  const body = document.querySelector(".search-results");
-  const filters = document.querySelector(".search-filters");
-  const data = await request.searchValue(query);
+  const body = document.querySelector(".autocomplete-results");
+  const event = new eventHandler();
 
-  create.searchFilters(filters, data);
+  event.loading(body);
+  const data = await request.searchAutoCompleteValue(query, amount);
+  body.classList.remove("hidden");
   create.searchResults(body, data);
+
+  const moreResults = document.querySelector(".autocomplete-more");
+  moreResults.addEventListener("click", onClick);
+};
+
+const searchDetail = async query => {
+  const request = new GetData();
+  const create = new Generate();
+  const event = new eventHandler();
+  const body = document.querySelector(".search-results");
+  const aside = document.querySelector(".search-filters");
+  body.innerHTML = "";
+  event.loading(body);
+  const data = await request.searchValue(query);
+  aside.classList.remove("hidden");
+  create.searchDetailResults(body, data);
+};
+
+const initSearchMode = () => {
+  document.querySelector(".subcontent").style = "opacity: 0;";
+  document.querySelector(".title").classList.add("searching");
+  document.querySelector(".form-wrapper").classList.add("searching");
+};
+
+const onSubmit = e => {
+  e.preventDefault();
+  initSearchMode();
+  const value = document.querySelector("#searchField").value;
+  searchDetail(value);
 };
 
 const onChange = e => {
-  console.info(e.target.value);
-  const value = e.target.value;
-  search(value);
+  e.preventDefault();
+  const autoCompleteField = document.querySelector(".autocomplete-results");
+  const background = document.querySelector(".background-circle");
+  autoCompleteField.innerHTML = "";
+  background.classList.add("effect");
+  initSearchMode();
+
+  delay(() => {
+    autoCompleteField.classList.remove("hidden");
+    autoCompleteField.classList.add("searching");
+    search(e.target.value, 3);
+  }, 400);
 };
 
 export const initSearch = () => {
+  const searchForm = document.querySelector(".search-form");
   const searchField = document.querySelector("#searchField");
-  console.log(searchField);
-  searchField.addEventListener("input", onChange, false);
+  searchForm.addEventListener("submit", onSubmit);
+  searchField.addEventListener("input", onChange);
 };

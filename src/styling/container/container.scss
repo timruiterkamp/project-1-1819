@@ -1,0 +1,58 @@
+.background-circle {
+  width: 30vw;
+  height: 30vw;
+  background-color: yellow;
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+  right: 15vw;
+  top: 40vh;
+  animation: flow 30s linear infinite forwards;
+  opacity: 0.4;
+  transform-origin: 100% center;
+
+  &:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background: yellow;
+    animation: flow 30s linear reverse infinite;
+  }
+
+  &.effect {
+    animation: grow 0.3s linear forwards;
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+@keyframes flow {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes grow {
+  from {
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    right: 15vw;
+    top: 40vh;
+    background-color: yellow;
+    transform-origin: 100% center;
+  }
+  to {
+    width: 100vw;
+    height: 500%;
+    border-radius: 0;
+    right: 0;
+    top: 0;
+    background-color: orangered;
+    transform-origin: center center;
+  }
+}
