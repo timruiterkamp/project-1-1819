@@ -15,9 +15,21 @@
   transform: translateY(300px);
   animation: 1.2s fadeInTop forwards;
 }
+
+.fade-in {
+  opacity: 0;
+  animation: 0.5s 0.1s fadeIn forwards;
+}
+
 @keyframes fadeInTop {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  100% {
+    opacity: 1;
   }
 }
