@@ -53,6 +53,12 @@
         width: 90%;
         border-radius: 5px;
         height: 20px;
+        padding: 0 0.5em;
+        transition: padding 0.3s ease-in-out;
+
+        &:focus {
+          padding: 0.4em 0.5em;
+        }
       }
     }
   }

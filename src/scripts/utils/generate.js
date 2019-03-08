@@ -36,7 +36,7 @@ export default class Generate extends Component {
                   w(
                     "div",
                     { class: "autocomplete-image" },
-                    result.images
+                    result.images && result.images !== undefined
                       ? w("img", {
                           src: result.images[0]
                         })
@@ -45,17 +45,17 @@ export default class Generate extends Component {
                   w(
                     "div",
                     { class: "autocomplete-text" },
-                    result.title
+                    result.title && result.title.full !== undefined
                       ? w("h4", {}, result.title.full)
                       : w("h4", {}, "Titel: niet bekend"),
 
-                    result.author
+                    result.author && result.author.fullname !== undefined
                       ? w("p", {}, "Auteur: " + result.author.fullname)
                       : w("p", {}, "Auteur: niet bekend"),
-                    result.summary
+                    result.summary && result.summary !== undefined
                       ? w("p", {}, result.summary)
                       : w("p", {}, "Samenvatting: niet bekend"),
-                    result.format
+                    result.format && result.format !== undefined
                       ? w("p", {}, "format: " + result.format)
                       : w("p", {}, "Format: niet bekend")
                   )
@@ -87,14 +87,14 @@ export default class Generate extends Component {
           "div",
           { class: "search-items" },
           ...res.map(result => {
-            return result && result.title
+            return result && result !== undefined
               ? w(
                   "div",
                   {
                     class: "search-item"
                   },
 
-                  result.images
+                  result.images && result.images !== undefined
                     ? result.images[1]
                       ? w("img", {
                           src: result.images[1]
@@ -103,16 +103,16 @@ export default class Generate extends Component {
                           src: result.images[0]
                         })
                     : w("div", { class: "search-image-placeholder" }),
-                  result.title && result.title.full
+                  result.title && result.title.full !== undefined
                     ? w("h4", {}, result.title.full)
                     : w("h4", {}, "Titel: niet bekend"),
-                  result.author
+                  result.author && result.author.fullname !== undefined
                     ? w("p", {}, "Auteur: " + result.author.fullname)
                     : w("p", {}, "Auteur: niet bekend"),
-                  result.summary
+                  result.summary && result.summary !== undefined
                     ? w("p", {}, "Samenvatting: " + result.summary)
                     : w("p", {}, "Samenvatting: niet bekend"),
-                  result.format
+                  result.format && result.format !== undefined
                     ? w("p", {}, "format: " + result.format)
                     : w("p", {}, "Format: niet bekend")
                 )

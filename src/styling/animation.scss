@@ -1,0 +1,23 @@
+.fade-in-top {
+  opacity: 0;
+  transform: translateY(500px);
+  animation: 0.9s fadeInTop forwards;
+}
+
+.fade-in-top-fast {
+  opacity: 0;
+  transform: translateY(500px);
+  animation: 0.5s fadeInTop forwards;
+}
+
+.fade-in-top-slow {
+  opacity: 0;
+  transform: translateY(300px);
+  animation: 1.2s fadeInTop forwards;
+}
+@keyframes fadeInTop {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

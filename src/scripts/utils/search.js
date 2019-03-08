@@ -37,6 +37,7 @@ const searchDetail = async query => {
   body.innerHTML = "";
   body.classList.add("loading");
   event.loading(body);
+  body.classList.remove("fade-in-top-fast");
 
   const data = await request.searchValue(query);
 
@@ -44,7 +45,9 @@ const searchDetail = async query => {
   aside.classList.remove("hidden");
   body.classList.remove("loading");
   sorting.classList.remove("hidden");
-
+  sorting.classList.add("fade-in-top-slow");
+  body.classList.add("fade-in-top-fast");
+  aside.classList.add("fade-in-top");
   create.searchDetailResults(body, Store.state.searchData);
   initFilters();
 };
