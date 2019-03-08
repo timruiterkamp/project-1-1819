@@ -127,6 +127,7 @@ const filterTitle = e => {
 - [x] Loading states
 - [x] Store
 - [x] Minimize calls
+- [ ] Adding textual suggestions
 
 ## Techniques used
 
