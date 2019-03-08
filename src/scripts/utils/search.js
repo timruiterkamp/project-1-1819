@@ -21,7 +21,6 @@ const search = async (query, amount) => {
   const data = await request.searchAutoCompleteValue(query, amount);
   body.classList.remove("hidden");
   create.searchResults(body, data);
-  console.log(data);
   const moreResults = document.querySelector(".autocomplete-more");
   if (moreResults) {
     moreResults.addEventListener("click", onClick);
