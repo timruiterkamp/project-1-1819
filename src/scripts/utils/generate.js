@@ -1,6 +1,4 @@
 import Component from "../lib/component";
-import eventHandler from "./eventHandler";
-import { cleanString } from "./clean";
 
 export default class Generate extends Component {
   constructor() {
@@ -8,13 +6,7 @@ export default class Generate extends Component {
     this.w = this.dom.write;
   }
 
-  async searchFilters(appendParent, data) {
-    appendParent.innerHTML = "";
-    const w = this.w;
-  }
-
   async searchResults(appendParent, data) {
-    console.log(data);
     appendParent.innerHTML = "";
     const w = this.w;
 
@@ -58,7 +50,7 @@ export default class Generate extends Component {
                       : w("h4", {}, "Titel: niet bekend"),
 
                     result.author
-                      ? w("p", {}, "format: " + result.author.fullname)
+                      ? w("p", {}, "Auteur: " + result.author.fullname)
                       : w("p", {}, "Auteur: niet bekend"),
                     result.summary
                       ? w("p", {}, result.summary)
@@ -95,7 +87,6 @@ export default class Generate extends Component {
           "div",
           { class: "search-items" },
           ...res.map(result => {
-            console.log(result);
             return result && result.title
               ? w(
                   "div",
@@ -121,8 +112,8 @@ export default class Generate extends Component {
                   result.summary
                     ? w("p", {}, "Samenvatting: " + result.summary)
                     : w("p", {}, "Samenvatting: niet bekend"),
-                  result.formats
-                    ? w("p", {}, "format: " + result.formats.format._text)
+                  result.format
+                    ? w("p", {}, "format: " + result.format)
                     : w("p", {}, "Format: niet bekend")
                 )
               : "";

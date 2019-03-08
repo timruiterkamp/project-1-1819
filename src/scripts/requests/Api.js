@@ -32,7 +32,6 @@ class ApiCall {
     try {
       return await stream.all();
     } catch (error) {
-      console.error(error);
       throw new Error(error.message);
     }
   }
@@ -46,7 +45,6 @@ class ApiCall {
     try {
       return await stream.all();
     } catch (error) {
-      console.error(error);
       throw new Error(error.message);
     }
   }
@@ -58,7 +56,6 @@ export default class GetData extends ApiCall {
   }
 
   async searchValue(value) {
-    console.log(value);
     return await super.searchDetail(value);
   }
 }

@@ -6,8 +6,6 @@ export default class LoadingTemplate extends Component {
   }
 
   async render(container) {
-    // let el = this.app.querySelector(container);
-    console.log(container);
     const w = this.dom.write;
     const body = container ? container : this.app;
 

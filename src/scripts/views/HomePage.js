@@ -13,7 +13,6 @@ export default class Home extends Component {
 
     const w = this.dom.write;
     const header = document.querySelector("#header");
-    console.log(header);
     header.appendChild(
       this.dom.create(
         w(

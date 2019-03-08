@@ -123,7 +123,7 @@ const filterTitle = e => {
     const body = document.querySelector(".search-results");
     const titleFiltering = Store.state.searchData.map(data =>
       data.filter(item => {
-        if (item.title) {
+        if (item.title && item.title.full) {
           return item.title.full
             .toLowerCase()
             .includes(e.target.value.toLowerCase());
